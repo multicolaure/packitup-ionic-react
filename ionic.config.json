@@ -1,0 +1,7 @@
+{
+  "name": "packitup-ionic-react",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
