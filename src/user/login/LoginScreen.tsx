@@ -1,0 +1,24 @@
+import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonPage } from '@ionic/react';
+import LoginForm from './LoginForm';
+
+const LoginScreen: React.FC = () => {
+
+    return (
+        <IonPage>
+            <IonContent fullscreen color="light">
+                <main className="piu-middle" >
+                    <IonCard class="form">
+                        <IonCardHeader color="primary">
+                            <IonCardTitle class="">Pack it up!</IonCardTitle>
+                        </IonCardHeader>
+                        <IonCardContent>
+                            <LoginForm></LoginForm>
+                        </IonCardContent>
+                    </IonCard>
+                </main>
+            </IonContent>
+        </IonPage>
+    );
+};
+
+export default LoginScreen;
