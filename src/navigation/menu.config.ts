@@ -1,5 +1,7 @@
-import { homeMenuItems } from '../home/navigation'
+import { homeMenuItems } from '../home/navigation';
+import { categoriesMenuItems } from '../category/navigation';
 
 export const menuItems = [
-    ...homeMenuItems
+    ...homeMenuItems,
+    ...categoriesMenuItems,
 ]
