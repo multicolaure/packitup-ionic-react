@@ -13,6 +13,7 @@ const HomeScreen = () => {
         <IonHeader collapse="condense">
             <TopBar title={title}></TopBar>
         </IonHeader>
+        <div>Hello the world</div>
       </IonContent>
     </IonPage>)
 };

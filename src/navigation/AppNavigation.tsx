@@ -13,8 +13,8 @@ const AppNavigation = () => {
         <IonSplitPane contentId="main">
           <AppMenu />
           <IonRouterOutlet id="main">
-            <HomeNavigation />
-            <CategoryNavigation/>
+            {HomeNavigation()}
+            {CategoryNavigation()}
             <Redirect exact from="/" to="/home" />
           </IonRouterOutlet>
         </IonSplitPane>
