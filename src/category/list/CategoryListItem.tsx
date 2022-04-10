@@ -1,4 +1,4 @@
-import { IonItem, IonLabel, IonNote, IonThumbnail } from "@ionic/react";
+import { IonItem, IonLabel, IonNote } from "@ionic/react";
 import { useSelector } from "react-redux";
 import Icon from "../../ui/icon/Icon";
 import { Right } from "../../user/user";
@@ -22,7 +22,6 @@ export default function CategoryListItem({category}: CategoryListItemProps) {
 
     return (
         <IonItem>
-            
             <IonLabel>
                 {category.name}
             </IonLabel>

@@ -1,40 +1,44 @@
+import SortableItem from './SortableItem';
+import SortableList, { SortableListProps } from './SortableList';
+import VirtualList, { VirtualListProps } from './VirtualList';
 
 
-import { ReactNode } from 'react';
-import VirtualList from 'react-tiny-virtual-list';
-import AutoSizer from 'react-virtualized-auto-sizer';
+export type InteractiveListProps<TItem> = 
+Omit<SortableListProps<TItem>, "children">
+& VirtualListProps<TItem>;
 
 
-export type InteractiveListProps<TItem> = {
-    data: Array<TItem>,
-    itemHeight: number,
-    renderItem: (item: TItem, index: number) => ReactNode,
-    getItem?: (index: number) => TItem
-}
+function InteractiveList<TItem>({
+    items,
+    itemHeight, 
+    renderItem, 
+    getItem, 
+    getId = (item: TItem) => (item as any).id,
+    onSort}: InteractiveListProps<TItem>) {
 
-
-
-export default function InteractiveList<TItem>({data, itemHeight, renderItem, getItem: customGetItem}: InteractiveListProps<TItem>) {
-
-
-    const defaultGetItem = (index: number) => data[index];
-    const getItem = customGetItem ?? defaultGetItem;
+    const renderSortableItem = (item: TItem, index: number) => {
+        const itemId = getId(item);
+        return (
+            <SortableItem id={itemId}>
+                {renderItem(item, index)}
+            </SortableItem>
+        );
+    };
 
     return (
-    <AutoSizer>
-        {({height, width}) => (
+        <SortableList
+            items={items}
+            getId={getId}
+            onSort={onSort}
+            getItem={getItem}
+            renderOverlay={renderItem}>
             <VirtualList
-                width={width + 'px'}
-                height={height}
-                itemSize={itemHeight}
-                itemCount={data.length}
-                renderItem={({index, style}) =>
-                    <div key={index} style={style}>
-                        {renderItem(getItem(index), index)}
-                    </div>
-                }
-            ></VirtualList>
-        )}
-    </AutoSizer>
+            items={items} 
+            itemHeight={itemHeight}
+            renderItem={renderSortableItem}
+            getItem={getItem}></VirtualList>
+        </SortableList>
     );
 };
+
+export default InteractiveList;

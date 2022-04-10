@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoginScreen from "./login/LoginScreen";
 import { User } from "./user";
@@ -24,7 +24,7 @@ const AuthGuard = (props: AuthGuardProps) => {
         return () => {
             unsubscribe();
         };
-    }, [isAuthenticated]);
+    }, [isAuthenticated, dispatch]);
 
     if(isAuthenticated) {
         return props.children;

@@ -1,11 +1,12 @@
 import { IonButton } from "@ionic/react";
-import { useEffect, ReactNode } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store";
 import InteractiveList from "../../ui/list/InteractiveList";
 import WithEmptyList from "../../ui/list/WithEmptyList";
-import Loadable from "../../ui/loading/Loadable"
-import { fetchCategories, selectAllCategories, selectLoading } from "../category.slice";
+import Loadable from "../../ui/loading/Loadable";
+import { Category } from "../category";
+import { fetchCategories, reorderCategories, selectAllCategories, selectLoading } from "../category.slice";
 import CategoryListItem from "./CategoryListItem";
 
 
@@ -17,9 +18,13 @@ const CategoryList = () => {
 
     const dispatch = useAppDispatch();
 
+    const onReorder = (newCategories: Array<Category>) => {
+        dispatch(reorderCategories(newCategories))
+    }
+
     useEffect(() => {
         dispatch(fetchCategories());
-    }, []);
+    }, [dispatch]);
 
 
     const NoCategory = () => {
@@ -34,9 +39,10 @@ const CategoryList = () => {
         <Loadable loading={loading}>
             <WithEmptyList noData={NoCategory} data={categories}>
                 <InteractiveList
-                data={categories}
+                items={categories}
                 itemHeight={55}
                 renderItem={(item) => <CategoryListItem category={item}></CategoryListItem>}
+                onSort={onReorder}
                 ></InteractiveList>
             </WithEmptyList>
         </Loadable>

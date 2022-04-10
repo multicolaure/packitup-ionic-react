@@ -13,7 +13,7 @@ export default function UserMenuWidget(props: UserMenuWidgetProps) {
     return (
         <IonItem>
             <IonAvatar slot="start">
-                <img src={photoUrl} />
+                <img src={photoUrl} alt={text}/>
             </IonAvatar>
             <IonLabel>{text}</IonLabel>
         </IonItem>
