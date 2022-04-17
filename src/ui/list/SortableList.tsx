@@ -3,7 +3,7 @@
 import {
     closestCenter, DndContext, DragEndEvent,
     DragOverlay,
-    DragStartEvent, PointerSensor, TouchSensor, useSensor,
+    DragStartEvent, TouchSensor, MouseSensor, useSensor,
     useSensors
 } from '@dnd-kit/core';
 import {
@@ -42,7 +42,7 @@ function SortableList<TItem>({
     const [activeItemOldIndex, setActiveItemOldIndex] = useState<number | null>(null);
 
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(MouseSensor),
         useSensor(TouchSensor)
     );
 
