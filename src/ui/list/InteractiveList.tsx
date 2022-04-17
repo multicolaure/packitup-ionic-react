@@ -1,11 +1,20 @@
+import { ReactNode } from 'react';
+import { DragHandleOptions } from './dragHandle';
 import SortableItem from './SortableItem';
 import SortableList, { SortableListProps } from './SortableList';
 import VirtualList, { VirtualListProps } from './VirtualList';
 
 
+export type RenderOptions = {
+    dragHandleOptions?: DragHandleOptions,
+}
+
 export type InteractiveListProps<TItem> = 
 Omit<SortableListProps<TItem>, "children">
-& VirtualListProps<TItem>;
+& Omit<VirtualListProps<TItem>, "renderItem">
+& {
+    renderItem: (item: TItem, index: number, options: RenderOptions) => ReactNode,
+};
 
 
 function InteractiveList<TItem>({
@@ -19,8 +28,8 @@ function InteractiveList<TItem>({
     const renderSortableItem = (item: TItem, index: number) => {
         const itemId = getId(item);
         return (
-            <SortableItem id={itemId}>
-                {renderItem(item, index)}
+            <SortableItem id={itemId}
+                renderItem={(dragHandleOptions) => renderItem(item, index, {dragHandleOptions})}>
             </SortableItem>
         );
     };
@@ -31,7 +40,7 @@ function InteractiveList<TItem>({
             getId={getId}
             onSort={onSort}
             getItem={getItem}
-            renderOverlay={renderItem}>
+            renderOverlay={(item, index) => renderItem(item, index, {})}>
             <VirtualList
             items={items} 
             itemHeight={itemHeight}

@@ -41,7 +41,7 @@ const CategoryList = () => {
                 <InteractiveList
                 items={categories}
                 itemHeight={55}
-                renderItem={(item) => <CategoryListItem category={item}></CategoryListItem>}
+                renderItem={(item, _, {dragHandleOptions}) => <CategoryListItem category={item} dragHandleOptions={dragHandleOptions}></CategoryListItem>}
                 onSort={onReorder}
                 ></InteractiveList>
             </WithEmptyList>

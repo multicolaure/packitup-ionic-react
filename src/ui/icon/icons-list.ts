@@ -75,6 +75,7 @@ import {
     mdiCastle,
     mdiDramaMasks,
     mdiSilverware,
+    mdiDrag,
 } from '@mdi/js';
 
 
@@ -154,5 +155,6 @@ export default {
     'shovel': mdiShovel,
     'castle': mdiCastle,
     'drama-masks': mdiDramaMasks,
-    'silverware': mdiSilverware
+    'silverware': mdiSilverware,
+    'drag': mdiDrag,
 } as { [key: string]: string }
