@@ -32,7 +32,7 @@ export default function CategoryListItem({category, dragHandleOptions}: Category
                 <Icon name={category.icon}></Icon>
             </IonNote>
             <IonNote slot="end">
-                {dragHandleOptions ? <DragHandle options={dragHandleOptions}></DragHandle> : <Icon name="drag"></Icon>}
+                <DragHandle options={dragHandleOptions}></DragHandle>
             </IonNote>
         </IonItem>
     )
