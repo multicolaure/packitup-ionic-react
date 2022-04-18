@@ -2,7 +2,7 @@ import { IonButton } from "@ionic/react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store";
-import InteractiveList from "../../ui/list/InteractiveList";
+import InteractiveList, { RenderOptions } from "../../ui/list/InteractiveList";
 import WithEmptyList from "../../ui/list/WithEmptyList";
 import Loadable from "../../ui/loading/Loadable";
 import { Category } from "../category";
@@ -35,13 +35,25 @@ const CategoryList = () => {
             </div>
         );
     }
+
+    const upsertRoute = (category: Category) => {
+        return "/category/" + category.id!;
+    };
+
+    const ListItem = (item: Category, index: number, {dragHandleOptions}: RenderOptions) => 
+        <CategoryListItem
+            category={item}
+            dragHandleOptions={dragHandleOptions}
+            readRoute={upsertRoute(item)}
+            editRoute={upsertRoute(item)}></CategoryListItem>
+
     return (
         <Loadable loading={loading}>
             <WithEmptyList noData={NoCategory} data={categories}>
                 <InteractiveList
                 items={categories}
                 itemHeight={55}
-                renderItem={(item, _, {dragHandleOptions}) => <CategoryListItem category={item} dragHandleOptions={dragHandleOptions}></CategoryListItem>}
+                renderItem={ListItem}
                 onSort={onReorder}
                 ></InteractiveList>
             </WithEmptyList>

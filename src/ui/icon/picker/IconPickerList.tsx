@@ -13,7 +13,7 @@ export function IconPickerList({icons, onClickIcon}: IconPickerListProps) {
     return (
         <ul className={styles.grid}>
             {icons.map(icon => 
-                <li className={styles.element}>
+                <li className={styles.element} key={icon}>
                     <IonButton fill="clear" className={styles.button} color="medium"
                         onClick={() => onClickIcon?.(icon)}>
                         <Icon name={icon} size="2rem" slot="icon-only"></Icon>

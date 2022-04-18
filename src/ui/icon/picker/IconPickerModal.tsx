@@ -22,29 +22,31 @@ export function IconPickerModal(props: IconPickerModalProps) {
         setCurrentIcon(icon);
         setVisible(false);
         if (props.onChange) {
-        props.onChange(icon);
+            props.onChange(icon);
         }
     }
 
     return (
         <>
-            <IonItem onClick={() => setVisible(true)} color="light">
-                {currentIcon && <IonNote slot="end">
-                    <Icon name={currentIcon}></Icon>
-                </IonNote>}
+            <IonItem button lines="full"
+                onClick={() => setVisible(true)}>
                 <IonLabel>{props.label ?? "Choose your icon"}</IonLabel>
+                {currentIcon && 
+                    <IonNote slot="start">
+                        <Icon name={currentIcon}></Icon>
+                    </IonNote>}
             </IonItem>
             <IonModal
                 isOpen={visible}
             >
                 <IonHeader translucent>
-                <IonToolbar>
-                <IonTitle>{props.title ?? "Choose your icon"}</IonTitle>
-                <IonButtons slot="end">
-                    <IonButton onClick={() => setVisible(false)}><Icon name="close"></Icon></IonButton>
-                </IonButtons>
-                </IonToolbar>
-            </IonHeader>
+                    <IonToolbar>
+                        <IonTitle>{props.title ?? "Choose your icon"}</IonTitle>
+                        <IonButtons slot="end">
+                            <IonButton onClick={() => setVisible(false)}><Icon name="close"></Icon></IonButton>
+                        </IonButtons>
+                    </IonToolbar>
+                </IonHeader>
                 <IonContent><IconPickerList icons={iconsList} onClickIcon={selectIcon}></IconPickerList></IonContent>
             </IonModal>
         </>

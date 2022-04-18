@@ -11,20 +11,21 @@ import { Category } from "../category";
 export type CategoryListItemProps = {
     category: Category,
     dragHandleOptions?: DragHandleOptions,
-    onRead?: () => void,
-    onEdit?: () => void,
-    onDelete?: () => void,
+    readRoute?: string,
+    editRoute?: string,
+    deleteRoute?: string,
 }
 
 
-export default function CategoryListItem({category, dragHandleOptions}: CategoryListItemProps) {
+export default function CategoryListItem({category, dragHandleOptions, readRoute, editRoute}: CategoryListItemProps) {
 
     const hasReadRights = useSelector(hasRight(category, Right.read));
     const hasEditRights = useSelector(hasRight(category, Right.update));
     const hasDeleteRights = useSelector(hasRight(category, Right.delete));
 
     return (
-        <IonItem>
+        <IonItem routerLink={hasEditRights ? editRoute : (hasReadRights ? readRoute : undefined)}
+            routerDirection="forward">
             <IonLabel>
                 {category.name}
             </IonLabel>

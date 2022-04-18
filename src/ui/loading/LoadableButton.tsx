@@ -10,7 +10,7 @@ export type LoadableButtonProps  = {
 const LoadableButton = ({ loading, children, ...otherProps }: LoadableButtonProps) => {
 
     return (
-        <IonButton {...otherProps}>
+        <IonButton {...otherProps} disabled={loading}>
             {loading && <IonSpinner slot="start" class="spin ion-margin-end"></IonSpinner>}
             {children}
         </IonButton>

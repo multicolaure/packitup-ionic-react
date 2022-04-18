@@ -1,17 +1,18 @@
-import { IonButtons, IonMenuButton, IonTitle, IonToolbar } from "@ionic/react";
-
+import { IonBackButton, IonButtons, IonMenuButton, IonTitle, IonToolbar } from "@ionic/react";
 
 export type TopBarProps = {
     title?: string,
     subtitle?: string,
+    toBack?: boolean,
+    defaultBackRoute?: string,
 }
 
-const TopBar = ({title, subtitle}: TopBarProps) => {
+const TopBar = ({title, subtitle, toBack, defaultBackRoute}: TopBarProps) => {
 
     return (
         <IonToolbar color="primary">
             <IonButtons slot="start">
-              <IonMenuButton></IonMenuButton>
+              {toBack ? <IonBackButton defaultHref={defaultBackRoute}></IonBackButton> : <IonMenuButton></IonMenuButton>}
             </IonButtons>
             <IonTitle>
                 {title}
