@@ -1,3 +1,5 @@
+
+import { IconName } from './icon';
 import { 
     mdiBagCarryOn,
     mdiBriefcase,
@@ -76,6 +78,7 @@ import {
     mdiDramaMasks,
     mdiSilverware,
     mdiDrag,
+    mdiWindowClose
 } from '@mdi/js';
 
 
@@ -157,4 +160,5 @@ export default {
     'drama-masks': mdiDramaMasks,
     'silverware': mdiSilverware,
     'drag': mdiDrag,
-} as { [key: string]: string }
+    'close': mdiWindowClose,
+} as { [key: IconName]: string };
