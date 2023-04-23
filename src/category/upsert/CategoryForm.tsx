@@ -1,8 +1,9 @@
-import { IonCol, IonGrid, IonInput, IonItem, IonLabel, IonRow, IonText } from "@ionic/react";
-import { useState } from "react";
+import { IonCol, IonGrid, IonInput, IonItem, IonLabel, IonNote, IonRow, IonText } from "@ionic/react";
 import { IconPickerModal } from "../../ui/icon/picker/IconPickerModal";
 import LoadableButton from "../../ui/loading/LoadableButton";
-import { Category } from "../category";
+import { Category, CategorySchema } from "../category";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, Controller } from "react-hook-form";
 
 
 type CategoryFormProps = {
@@ -15,46 +16,51 @@ type CategoryFormProps = {
 
 export default function CategoryForm(props: CategoryFormProps) {
 
-    const [name, setName] = useState(props.category?.name ?? '');
-    const [icon, setIcon] = useState(props.category?.icon ?? '');
+    const { control, handleSubmit, formState } = useForm<Category>({
+        values: props.category,
+        defaultValues: {
+            name: ''
+        },
+        resolver: zodResolver(CategorySchema)
+    });
 
-    const getCategory = () => {
-        return {
-            id: props.category?.id,
-            name,
-            icon,
-        }
-    }
-
-
-    const onSave = () => {
-        props.onSave?.(getCategory());
+    const onSave = (category: Category) => {
+        props.onSave?.(category);
     }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit(onSave)}>
             <IonGrid>
                 <IonRow>
                     <IonCol>
-                        <IconPickerModal icon={icon} onChange={setIcon} label="Icon *"
-                            title="Choose the category icon"></IconPickerModal>
+                        <Controller
+                            name="icon"
+                            control={control}
+                            render={({ field }) => <IconPickerModal icon={field.value} onChange={field.onChange} label="Icon *"
+                            title="Choose the category icon"></IconPickerModal>}
+                        ></Controller>
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol>
-                        <IonItem>
+                        {<Controller
+                            name="name"
+                            control={control}
+                            render={({ field }) => (<IonItem>
                             <IonLabel position="floating">Name *</IonLabel>
-                            <IonInput value={name}
+                            <IonInput value={field.value}
                                 debounce={200}
-                                onIonChange={e => setName(e.detail.value!)}
+                                onIonChange={e => field.onChange(e.detail.value)}
+                                onIonBlur={field.onBlur}
                                 clearInput></IonInput>
-                        </IonItem>
+                            </IonItem>)}
+                        ></Controller>}
                     </IonCol>
                 </IonRow>
                 {props.errorMessage && <IonRow><IonText color="danger" class="ion-padding">{props.errorMessage}</IonText></IonRow> }
                 <IonRow>
                     <IonCol class="piu-content-end">
-                        <LoadableButton loading={props.saving} onClick={onSave}>Save</LoadableButton>
+                        <LoadableButton type="submit" loading={props.saving} disabled={!formState.isValid}>Save</LoadableButton>
                     </IonCol>
                 </IonRow>
             </IonGrid>
