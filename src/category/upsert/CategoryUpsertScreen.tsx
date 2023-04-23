@@ -1,6 +1,7 @@
-import { IonContent, IonHeader, IonPage } from "@ionic/react";
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage } from "@ionic/react";
+import { trash } from "ionicons/icons";
 import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import {  useHistory, useParams } from "react-router";
 import { toCommonErrorMessage } from "../../error/error.service";
 import TopBar from "../../navigation/TopBar";
 import { useAppDispatch } from "../../store";
@@ -39,14 +40,23 @@ const CategoryUpsertScreen = () => {
             dispatch(removeCategory(savedCategory?.id))
                 .then(({ meta }) => {
                     if (meta.requestStatus === "fulfilled") {
-                    //navigation.navigate(CATEGORY_LIST);
+                        history.goBack();
                     }
                 });
         }
     }
 
     const title = savedCategory ? `Edit ${savedCategory.name ?? 'category'}` : 'New category';
-    const renderTopbar = () => <TopBar title={title} toBack={true} defaultBackRoute="/categories"></TopBar>
+    const renderTopbar = () => (
+        <TopBar title={title} toBack={true} defaultBackRoute="/categories">
+            {hasDeleteRights && 
+                <IonButtons slot="end">
+                    <IonButton onClick={onRemove}>
+                        <IonIcon slot="icon-only" icon={trash}></IonIcon>
+                    </IonButton>
+                </IonButtons>}
+        </TopBar>
+    )
 
     return (<IonPage>
       <IonHeader>
