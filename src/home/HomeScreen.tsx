@@ -15,7 +15,6 @@ const HomeScreen = () => {
             <TopBar title={title}></TopBar>
         </IonHeader>
         
-        <IconPickerModal></IconPickerModal>
       </IonContent>
     </IonPage>)
 };
