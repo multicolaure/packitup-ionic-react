@@ -22,6 +22,14 @@ const CategoryList = () => {
         dispatch(reorderCategories(newCategories))
     }
 
+    const getNewRoute = () => {
+        return "/category";
+    };
+
+    const getUpdateRoute = (category: Category) => {
+        return "/category/" + category.id!;
+    };
+
     useEffect(() => {
         dispatch(fetchCategories());
     }, [dispatch]);
@@ -31,21 +39,18 @@ const CategoryList = () => {
         return (
             <div className="piu-middle">
                 <p>No category yet !</p>
-                <IonButton>Add a new category</IonButton>
+                <IonButton routerLink={getNewRoute()}>Add a new category</IonButton>
             </div>
         );
     }
 
-    const upsertRoute = (category: Category) => {
-        return "/category/" + category.id!;
-    };
 
     const ListItem = (item: Category, index: number, {dragHandleOptions}: RenderOptions) => 
         <CategoryListItem
             category={item}
             dragHandleOptions={dragHandleOptions}
-            readRoute={upsertRoute(item)}
-            editRoute={upsertRoute(item)}></CategoryListItem>
+            readRoute={getUpdateRoute(item)}
+            editRoute={getUpdateRoute(item)}></CategoryListItem>
 
     return (
         <Loadable loading={loading}>

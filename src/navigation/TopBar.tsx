@@ -1,13 +1,15 @@
 import { IonBackButton, IonButtons, IonMenuButton, IonTitle, IonToolbar } from "@ionic/react";
+import { ReactNode } from "react";
 
 export type TopBarProps = {
     title?: string,
     subtitle?: string,
     toBack?: boolean,
     defaultBackRoute?: string,
+    children?: ReactNode
 }
 
-const TopBar = ({title, subtitle, toBack, defaultBackRoute}: TopBarProps) => {
+const TopBar = ({title, subtitle, toBack, defaultBackRoute, children}: TopBarProps) => {
 
     return (
         <IonToolbar color="primary">
@@ -18,6 +20,7 @@ const TopBar = ({title, subtitle, toBack, defaultBackRoute}: TopBarProps) => {
                 {title}
                 {subtitle && <p><small>{subtitle}</small></p>}
             </IonTitle>
+            {children}
         </IonToolbar>
     )
 }

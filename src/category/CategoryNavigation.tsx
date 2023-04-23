@@ -6,6 +6,7 @@ import CategoryUpsertScreen from "./upsert/CategoryUpsertScreen";
 const CategoryNavigation = () => {
     return (
         <>
+            <Route path="/category" component={CategoryUpsertScreen} />
             <Route path="/category/:id" component={CategoryUpsertScreen} />
             <Route path="/categories" component={CategoryListScreen} exact={true} />
         </>
