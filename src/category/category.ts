@@ -1,10 +1,14 @@
-import { Secured } from "../user/user";
+import { SecuredSchema } from "../user/user";
+import { z } from "zod";
 
-export type CategoryIcon = string;
+export const CategoryIconSchema = z.string();
+export type CategoryIcon = z.infer<typeof CategoryIconSchema>;
 
-export interface Category extends Secured {
-    id?: string,
-    name: string,
-    icon: CategoryIcon,
-    order?: number,
-}
+export const CategorySchema = z.object({
+    id: z.string().optional(),
+    name: z.string(),
+    icon: CategoryIconSchema,
+    order: z.number().positive().int().optional()
+}).merge(SecuredSchema)
+
+export type Category = z.infer<typeof CategorySchema>;
