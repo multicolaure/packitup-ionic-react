@@ -7,7 +7,7 @@ const LoginScreen: React.FC = () => {
         <IonPage>
             <IonContent fullscreen color="light">
                 <main className="piu-middle" >
-                    <IonCard class="form">
+                    <IonCard className="form">
                         <IonCardHeader color="primary">
                             <IonCardTitle class="">Pack it up!</IonCardTitle>
                         </IonCardHeader>

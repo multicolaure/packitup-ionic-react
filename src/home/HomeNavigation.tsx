@@ -4,7 +4,9 @@ import HomeScreen from "./HomeScreen";
 
 const HomeNavigation = () => {
     return (
-        <Route path="/home" component={HomeScreen} exact={true} />
+        <Route path="/home" exact>
+            <HomeScreen/>
+        </Route>
     )
 }
 

@@ -1,6 +1,5 @@
 import { IonContent, IonHeader, IonPage } from "@ionic/react";
 import TopBar from "../navigation/TopBar";
-import { IconPickerModal } from "../ui/icon/picker/IconPickerModal";
 
 const HomeScreen = () => {
     const title = "Pack it up!";

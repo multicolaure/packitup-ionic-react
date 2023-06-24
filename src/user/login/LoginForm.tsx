@@ -1,4 +1,4 @@
-import { IonCol, IonGrid, IonInput, IonItem, IonLabel, IonRow, IonText } from '@ionic/react';
+import { IonCol, IonGrid, IonInput, IonItem, IonRow, IonText } from '@ionic/react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadableButton from '../../ui/loading/LoadableButton';
@@ -46,8 +46,8 @@ const LoginForm = () => {
                 <IonRow>
                     <IonCol>
                         <IonItem>
-                            <IonLabel position="floating">Username</IonLabel>
-                            <IonInput value={username} onIonChange={event => setUsername(event.detail.value ?? '')}
+                            <IonInput label="Username" labelPlacement="floating"
+                                value={username} onIonChange={event => setUsername(event.detail.value ?? '')}
                                 autocomplete="email" autofocus={true}></IonInput>
                         </IonItem>
                     </IonCol>
@@ -55,13 +55,13 @@ const LoginForm = () => {
                 <IonRow>
                     <IonCol>
                         <IonItem>
-                            <IonLabel position="floating">Password</IonLabel>
-                            <IonInput value={password} onIonChange={event => setPassword(event.detail.value ?? '')}
+                            <IonInput label="Password" labelPlacement="floating"
+                                value={password} onIonChange={event => setPassword(event.detail.value ?? '')}
                                 type="password" autocomplete="current-password"></IonInput>
                         </IonItem>
                     </IonCol>
                 </IonRow>
-                {errorMessage && <IonRow><IonText color="danger" class="ion-padding">{errorMessage}</IonText></IonRow> }
+                {errorMessage && <IonRow><IonText color="danger" class="ion-padding">{errorMessage}</IonText></IonRow>}
                 <IonRow>
                     <IonCol class="piu-content-end">
                         <LoadableButton onClick={() => submit()} loading={loading && provider === 'Manual'}>Sign in</LoadableButton>
