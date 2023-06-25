@@ -32,7 +32,7 @@ export default function CategoryListItem({category, dragHandleOptions, readRoute
 
     return (
         <IonItemSliding>
-            <IonItem routerLink={hasEditRights ? editRoute : (hasReadRights ? readRoute : undefined)}
+            <IonItem lines="full" routerLink={hasEditRights ? editRoute : (hasReadRights ? readRoute : undefined)}
             routerDirection="forward">
                 <IonLabel>
                     {category.name}

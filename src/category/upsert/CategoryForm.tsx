@@ -5,6 +5,7 @@ import { Category, CategorySchema } from "../category";
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
+import FormRow from "../../ui/form/FormRow";
 
 
 type CategoryFormProps = {
@@ -38,38 +39,32 @@ export default function CategoryForm(props: CategoryFormProps) {
 
     return (
         <form onSubmit={handleSubmit(onSave)}>
-            <IonGrid>
-                <IonRow>
-                    <IonCol>
-                        <Controller
-                            name="icon"
-                            control={control}
-                            render={({field}) => <IconPickerModal 
-                            icon={field.value}
-                            onChange={field.onChange}
-                            label="Icon *"
-                            title="Choose the category icon"></IconPickerModal>}
-                        />
-                    </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <Controller
-                                name="name"
-                                control={control}
-                                render={({field}) => <IonInput
-                                    label="Name *"
-                                    labelPlacement="floating"
-                                    debounce={200}
-                                    value={field.value}
-                                    onIonInput={e => field.onChange(e.detail.value!)}
-                                    onBlur={field.onBlur}
-                                    clearInput></IonInput>}
-                            />
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+            <IonGrid style={{maxWidth: '450px'}}>
+                <FormRow>
+                    <Controller
+                        name="icon"
+                        control={control}
+                        render={({field}) => <IconPickerModal 
+                        icon={field.value}
+                        onChange={field.onChange}
+                        label="Icon *"
+                        title="Choose the category icon"></IconPickerModal>}
+                    />
+                </FormRow>
+                <FormRow>
+                    <Controller
+                        name="name"
+                        control={control}
+                        render={({field}) => <IonItem fill="solid"><IonInput
+                            label="Name *"
+                            labelPlacement="floating"
+                            debounce={200}
+                            value={field.value}
+                            onIonInput={e => field.onChange(e.detail.value!)}
+                            onBlur={field.onBlur}
+                            clearInput></IonInput></IonItem>}
+                    />
+                </FormRow>
                 {props.errorMessage && <IonRow><IonText color="danger" class="ion-padding">{props.errorMessage}</IonText></IonRow> }
                 <IonRow>
                     <IonCol class="piu-content-end">

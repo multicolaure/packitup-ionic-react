@@ -28,7 +28,7 @@ export function IconPickerModal(props: IconPickerModalProps) {
 
     return (
         <>
-            <IonItem button lines="full"
+            <IonItem button lines="full" fill="solid"
                 onClick={() => setVisible(true)}>
                 <IonLabel>{props.label ?? "Choose your icon"}</IonLabel>
                 {currentIcon && 

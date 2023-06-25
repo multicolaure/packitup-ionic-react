@@ -12,7 +12,9 @@ const LoginScreen: React.FC = () => {
                             <IonCardTitle class="">Pack it up!</IonCardTitle>
                         </IonCardHeader>
                         <IonCardContent>
-                            <LoginForm></LoginForm>
+                            <div className="ion-padding">
+                                <LoginForm/>
+                            </div>
                         </IonCardContent>
                     </IonCard>
                 </main>

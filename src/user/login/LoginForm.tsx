@@ -1,6 +1,7 @@
 import { IonCol, IonGrid, IonInput, IonItem, IonRow, IonText } from '@ionic/react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import FormRow from '../../ui/form/FormRow';
 import LoadableButton from '../../ui/loading/LoadableButton';
 import { login, selectError, selectLoading, selectProvider } from '../user.slice';
 import { LoginError } from './login.service';
@@ -43,24 +44,20 @@ const LoginForm = () => {
     return (
         <form>
             <IonGrid>
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonInput label="Username" labelPlacement="floating"
-                                value={username} onIonChange={event => setUsername(event.detail.value ?? '')}
-                                autocomplete="email" autofocus={true}></IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonInput label="Password" labelPlacement="floating"
-                                value={password} onIonChange={event => setPassword(event.detail.value ?? '')}
-                                type="password" autocomplete="current-password"></IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                <FormRow>
+                    <IonItem fill="solid">
+                        <IonInput label="Username" labelPlacement="floating"
+                            value={username} onIonChange={event => setUsername(event.detail.value ?? '')}
+                            autocomplete="email" autofocus={true}></IonInput>
+                    </IonItem>
+                </FormRow>
+                <FormRow>
+                    <IonItem fill="solid">
+                        <IonInput label="Password" labelPlacement="floating"
+                            value={password} onIonChange={event => setPassword(event.detail.value ?? '')}
+                            type="password" autocomplete="current-password"></IonInput>
+                    </IonItem>
+                </FormRow>
                 {errorMessage && <IonRow><IonText color="danger" class="ion-padding">{errorMessage}</IonText></IonRow>}
                 <IonRow>
                     <IonCol class="piu-content-end">

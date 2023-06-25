@@ -11,7 +11,7 @@ export default function UserMenuWidget(props: UserMenuWidgetProps) {
     const photoUrl = props.user?.photoUrl ?? require('../assets/navigation/profile-user.png');
 
     return (
-        <IonItem>
+        <IonItem lines="full">
             <IonAvatar slot="start">
                 <img src={photoUrl} alt={text}/>
             </IonAvatar>
