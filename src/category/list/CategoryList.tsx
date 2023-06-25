@@ -6,7 +6,7 @@ import InteractiveList, { RenderOptions } from "../../ui/list/InteractiveList";
 import WithEmptyList from "../../ui/list/WithEmptyList";
 import Loadable from "../../ui/loading/Loadable";
 import { Category } from "../category";
-import { fetchCategories, reorderCategories, selectAllCategories, selectLoading } from "../category.slice";
+import { fetchCategories, removeCategory, reorderCategories, selectAllCategories, selectLoading } from "../category.slice";
 import CategoryListItem from "./CategoryListItem";
 
 
@@ -30,6 +30,12 @@ const CategoryList = () => {
         return "/category/" + category.id!;
     };
 
+    const handleDelete = (category: Category) => {
+        if(category.id) {
+            dispatch(removeCategory(category.id));
+        }
+    }
+
     useEffect(() => {
         dispatch(fetchCategories());
     }, [dispatch]);
@@ -50,7 +56,8 @@ const CategoryList = () => {
             category={item}
             dragHandleOptions={dragHandleOptions}
             readRoute={getUpdateRoute(item)}
-            editRoute={getUpdateRoute(item)}></CategoryListItem>
+            editRoute={getUpdateRoute(item)}
+            onDelete={handleDelete}></CategoryListItem>
 
     return (
         <Loadable loading={loading}>
