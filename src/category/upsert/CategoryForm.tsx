@@ -2,8 +2,9 @@ import { IonCol, IonGrid, IonInput, IonItem, IonRow, IonText } from "@ionic/reac
 import { IconPickerModal } from "../../ui/icon/picker/IconPickerModal";
 import LoadableButton from "../../ui/loading/LoadableButton";
 import { Category, CategorySchema } from "../category";
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 
 type CategoryFormProps = {
@@ -16,13 +17,20 @@ type CategoryFormProps = {
 
 export default function CategoryForm(props: CategoryFormProps) {
 
-    const { control, handleSubmit, formState } = useForm<Category>({
-        values: props.category,
-        defaultValues: {
-            name: ''
-        },
+    const emptyForm = {
+        icon: undefined,
+        name: ''
+    }
+
+    const { control, handleSubmit, reset, formState } = useForm<Category>({
+        defaultValues: props.category ?? emptyForm,
         resolver: zodResolver(CategorySchema)
     });
+
+    useEffect(() => {
+        reset(props.category ?? emptyForm);
+    }, [props.category]);
+
 
     const onSave = (category: Category) => {
         props.onSave?.(category);
@@ -36,35 +44,36 @@ export default function CategoryForm(props: CategoryFormProps) {
                         <Controller
                             name="icon"
                             control={control}
-                            render={({ field }) => <IconPickerModal icon={field.value} onChange={field.onChange} label="Icon *"
+                            render={({field}) => <IconPickerModal 
+                            icon={field.value}
+                            onChange={field.onChange}
+                            label="Icon *"
                             title="Choose the category icon"></IconPickerModal>}
-                        ></Controller>
+                        />
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol>
                         <IonItem>
-                        {<Controller
-                            name="name"
-                            control={control}
-                            render={({ field }) => (
-                            <IonInput 
-                                label="Name *"
-                                labelPlacement="floating"
-                                value={field.value}
-                                debounce={200}
-                                onIonChange={e => field.onChange(e.detail.value)}
-                                onIonBlur={field.onBlur}
-                                clearInput></IonInput>
-                            )}
-                        ></Controller>}
+                            <Controller
+                                name="name"
+                                control={control}
+                                render={({field}) => <IonInput
+                                    label="Name *"
+                                    labelPlacement="floating"
+                                    debounce={200}
+                                    value={field.value}
+                                    onIonInput={e => field.onChange(e.detail.value!)}
+                                    onBlur={field.onBlur}
+                                    clearInput></IonInput>}
+                            />
                         </IonItem>
                     </IonCol>
                 </IonRow>
                 {props.errorMessage && <IonRow><IonText color="danger" class="ion-padding">{props.errorMessage}</IonText></IonRow> }
                 <IonRow>
                     <IonCol class="piu-content-end">
-                        <LoadableButton type="submit" loading={props.saving} disabled={!formState.isValid}>Save</LoadableButton>
+                        <LoadableButton type="submit" disabled={!formState.isValid} loading={props.saving} >Save</LoadableButton>
                     </IonCol>
                 </IonRow>
             </IonGrid>
