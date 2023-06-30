@@ -1,5 +1,5 @@
-import { IonCol, IonGrid, IonInput, IonRow, IonText } from '@ionic/react';
-import { Controller, FieldError, useForm } from 'react-hook-form';
+import { IonCol, IonGrid, IonRow, IonText } from '@ionic/react';
+import { FieldError, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import FormRow from '../../ui/form/FormRow';
 import LoadableButton from '../../ui/loading/LoadableButton';
@@ -9,6 +9,7 @@ import { LoginError } from './login.service';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ZodIssueCode } from "zod";
 import { useEffect } from 'react';
+import Input from '../../ui/form/Input';
 
 
 const toErrorMessage = (error?: LoginError): { message: string, field?: keyof Credentials } | undefined => {
@@ -75,7 +76,7 @@ const LoginForm = () => {
 
     const dispatch = useDispatch();
 
-    const { control, handleSubmit, formState: { errors, isValid, touchedFields, submitCount }, setError } = useForm<Credentials>({
+    const { control, handleSubmit, formState: { errors, isValid, submitCount }, setError } = useForm<Credentials>({
         defaultValues: emptyForm,
         resolver: zodResolver(CredentialsSchema),
         mode: "onTouched"
@@ -105,35 +106,18 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit(save)}>
             <IonGrid>
                 <FormRow>
-                    <Controller
-                        name="username"
-                        control={control}
-                        render={({ field }) => <IonInput
-                            fill="solid" label="Username" labelPlacement="floating"
-                            value={field.value}
-                            debounce={200}
-                            onIonInput={event => field.onChange(event.detail.value ?? '')}
-                            onBlur={field.onBlur}
-                            autocomplete="email" autofocus={true}
-                            className={`${errors.username ? 'ion-invalid' : 'ion-valid'} ${touchedFields.username && 'ion-touched'}`}
-                            errorText={usernameErrorMessage(errors.username)}></IonInput>}
-                    />
+                    <Input name="username"
+                        control={control} 
+                        label="Username" 
+                        errorMessageProvider={usernameErrorMessage}
+                        autocomplete="email" autofocus={true}/>
                 </FormRow>
                 <FormRow>
-                    <Controller
-                        name="password"
-                        control={control}
-                        render={({ field }) =>
-                            <IonInput
-                                fill="solid" label="Password" labelPlacement="floating"
-                                value={field.value}
-                                debounce={200}
-                                onIonInput={event => field.onChange(event.detail.value ?? '')}
-                                onBlur={field.onBlur}
-                                type="password" autocomplete="current-password"
-                                className={`${errors.password ? 'ion-invalid' : 'ion-valid'} ${touchedFields.password && 'ion-touched'}`}
-                                errorText={passwordErrorMessage(errors.password)}></IonInput>}
-                    />
+                <Input name="password"
+                        control={control} 
+                        label="Password" 
+                        errorMessageProvider={passwordErrorMessage}
+                        type="password" autocomplete="current-password"/>
                 </FormRow>
                 {errors.root && <IonRow><IonText color="danger" class="ion-padding" role="alert">{errors.root?.message}</IonText></IonRow>}
                 <IonRow>
