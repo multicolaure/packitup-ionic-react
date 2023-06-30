@@ -1,22 +1,26 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonPage } from '@ionic/react';
+import { IonCol, IonContent, IonGrid, IonPage, IonRow } from '@ionic/react';
 import LoginForm from './LoginForm';
+import image from '../../assets/images/undraw_roadtrip.svg';
 
 const LoginScreen: React.FC = () => {
 
     return (
         <IonPage>
-            <IonContent fullscreen color="light">
-                <main className="piu-middle" >
-                    <IonCard className="form">
-                        <IonCardHeader color="primary">
-                            <IonCardTitle class="">Pack it up!</IonCardTitle>
-                        </IonCardHeader>
-                        <IonCardContent>
-                            <div className="ion-padding">
-                                <LoginForm/>
-                            </div>
-                        </IonCardContent>
-                    </IonCard>
+            <IonContent fullscreen>
+
+                <main className="piu-middle">
+                    <IonGrid className="piu-middle">
+                        <IonRow>
+                            <IonCol size="12" size-md="6">
+                                <img src={image} style={{maxWidth: '100%', maxHeight: '100%'}} aria-label="People travelling during a roadtrip"/>
+                            </IonCol>
+                            <IonCol size="12" size-md="6">
+                                <div className="ion-padding">
+                                    <LoginForm />
+                                </div>
+                            </IonCol>
+                        </IonRow>
+                    </IonGrid>
                 </main>
             </IonContent>
         </IonPage>
