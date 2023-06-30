@@ -56,13 +56,13 @@ export const userSlice = createSlice({
     builder
       .addCase(login.pending, (state, action) => {
         state.loading = true;
+        state.error = undefined;
         state.provider = LoginProvider.Manual;
       })
       .addCase(login.fulfilled, (state, action) => {
         const user: User = action.payload;
         state.user = user;
         state.authenticated = true;
-        state.error = undefined;
         state.loading = false;
         state.provider = undefined;
       })
@@ -73,12 +73,12 @@ export const userSlice = createSlice({
       })
       .addCase(loginWithAuthResponse.pending, (state, action) => {
         state.loading = true;
+        state.error = undefined;
       })
       .addCase(loginWithAuthResponse.fulfilled, (state, action) => {
         const user: User = action.payload;
         state.user = user;
         state.authenticated = true;
-        state.error = undefined;
         state.loading = false;
         state.provider = undefined;
       })
