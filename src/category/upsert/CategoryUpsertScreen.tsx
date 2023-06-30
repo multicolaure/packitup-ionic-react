@@ -1,15 +1,15 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage } from "@ionic/react";
-import { trash } from "ionicons/icons";
+import { IonContent, IonHeader, IonPage } from "@ionic/react";
 import { useSelector } from "react-redux";
 import {  useHistory, useParams } from "react-router";
 import { toCommonErrorMessage } from "../../error/error.service";
-import TopBar from "../../navigation/TopBar";
 import { useAppDispatch } from "../../store";
 import { Right } from "../../user/user";
 import { hasRight } from "../../user/user.slice";
 import { Category } from "../category";
 import { removeCategory, selectCategory, selectError, selectLoading, upsertCategory } from "../category.slice";
 import CategoryForm from "./CategoryForm";
+import { CategoryUpsertTopbar } from "./CategoryUpsertTopbar";
+
 
 const CategoryUpsertScreen = () => {
 
@@ -47,25 +47,16 @@ const CategoryUpsertScreen = () => {
     }
 
     const title = savedCategory ? `Edit ${savedCategory.name ?? 'category'}` : 'New category';
-    const renderTopbar = () => (
-        <TopBar title={title} toBack={true} defaultBackRoute="/categories">
-            {hasDeleteRights && 
-                <IonButtons slot="end">
-                    <IonButton onClick={onRemove}>
-                        <IonIcon slot="icon-only" icon={trash}></IonIcon>
-                    </IonButton>
-                </IonButtons>}
-        </TopBar>
-    )
+    
 
     return (<IonPage>
       <IonHeader>
-        {renderTopbar()}
+        <CategoryUpsertTopbar title={title} onRemove={onRemove} hasDeleteRights={hasDeleteRights} />
       </IonHeader>
 
       <IonContent fullscreen>
         <IonHeader collapse="condense">
-            {renderTopbar()}
+            <CategoryUpsertTopbar title={title} onRemove={onRemove} hasDeleteRights={hasDeleteRights} />
         </IonHeader>
         <main className="ion-padding">
             <CategoryForm
