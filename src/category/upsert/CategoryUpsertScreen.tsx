@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import {  useHistory, useParams } from "react-router";
 import { toCommonErrorMessage } from "../../error/error.service";
 import { useAppDispatch } from "../../store";
+import { UpsertTopbar } from "../../ui/topbar/UpsertTopbar";
 import { Right } from "../../user/user";
 import { hasRight } from "../../user/user.slice";
 import { Category } from "../category";
 import { removeCategory, selectCategory, selectError, selectLoading, upsertCategory } from "../category.slice";
 import CategoryForm from "./CategoryForm";
-import { CategoryUpsertTopbar } from "./CategoryUpsertTopbar";
 
 
 const CategoryUpsertScreen = () => {
@@ -51,12 +51,12 @@ const CategoryUpsertScreen = () => {
 
     return (<IonPage>
       <IonHeader>
-        <CategoryUpsertTopbar title={title} onRemove={onRemove} hasDeleteRights={hasDeleteRights} />
+        <UpsertTopbar title={title} onRemove={onRemove} hasDeleteRights={hasDeleteRights} defaultBackRoute="/categories" />
       </IonHeader>
 
       <IonContent fullscreen>
         <IonHeader collapse="condense">
-            <CategoryUpsertTopbar title={title} onRemove={onRemove} hasDeleteRights={hasDeleteRights} />
+            <UpsertTopbar title={title} onRemove={onRemove} hasDeleteRights={hasDeleteRights} defaultBackRoute="/categories" />
         </IonHeader>
         <main className="ion-padding">
             <CategoryForm

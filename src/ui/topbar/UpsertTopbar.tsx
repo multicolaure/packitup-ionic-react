@@ -2,16 +2,17 @@ import { IonButtons, IonButton, IonIcon } from "@ionic/react"
 import { trash } from "ionicons/icons"
 import TopBar from "../../navigation/TopBar"
 
-type CategoryUpsertTopbarProps = {
+type UpsertTopbarProps = {
     title: string,
     onRemove?: () => void,
-    hasDeleteRights: boolean
+    hasDeleteRights: boolean,
+    defaultBackRoute: string,
 }
 
 
-export const CategoryUpsertTopbar = ({ title, onRemove, hasDeleteRights }: CategoryUpsertTopbarProps ) => {
+export const UpsertTopbar = ({ title, onRemove, hasDeleteRights, defaultBackRoute }: UpsertTopbarProps ) => {
     return (
-        <TopBar title={title} toBack={true} defaultBackRoute="/categories">
+        <TopBar title={title} toBack={true} defaultBackRoute={defaultBackRoute}>
             {hasDeleteRights && 
                 <IonButtons slot="end">
                     <IonButton onClick={onRemove}>
