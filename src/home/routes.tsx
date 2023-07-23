@@ -2,12 +2,10 @@ import { Route } from "react-router";
 import HomeScreen from "./HomeScreen";
 
 
-const HomeNavigation = () => {
-    return (
+export const getHomeRoutes = () => {
+    return [
         <Route path="/home" exact>
-            <HomeScreen/>
+            <HomeScreen></HomeScreen>
         </Route>
-    )
+    ]
 }
-
-export default HomeNavigation;

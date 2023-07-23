@@ -1,24 +1,26 @@
 import { IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect } from "react-router";
-import CategoryNavigation from "../category/CategoryNavigation";
-import HomeNavigation from "../home/HomeNavigation";
-import StuffNavigation from "../stuff/StuffNavigation";
+import { getCategoryRoutes } from "../category/routes";
+import { getHomeRoutes } from "../home/routes";
+import { getStuffRoutes } from "../stuff/routes";
 import AppMenu from "./AppMenu";
 
 
 const AppNavigation = () => {
+
+  const routes = [
+    ...getHomeRoutes(),
+    ...getCategoryRoutes(),
+    ...getStuffRoutes(),
+    <Redirect exact from="/" to="/home" />
+  ]
     
     return (
         <IonReactRouter>
         <IonSplitPane contentId="main">
           <AppMenu />
-          <IonRouterOutlet id="main">
-            {HomeNavigation()}
-            {CategoryNavigation()}
-            {StuffNavigation()}
-            <Redirect exact from="/" to="/home" />
-          </IonRouterOutlet>
+          <IonRouterOutlet id="main" children={routes}></IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
     )

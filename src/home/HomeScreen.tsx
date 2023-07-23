@@ -4,6 +4,7 @@ import TopBar from "../navigation/TopBar";
 const HomeScreen = () => {
     const title = "Pack it up!";
 
+
     return (<IonPage>
       <IonHeader>
         <TopBar title={title}></TopBar>
@@ -13,7 +14,6 @@ const HomeScreen = () => {
         <IonHeader collapse="condense">
             <TopBar title={title}></TopBar>
         </IonHeader>
-        
       </IonContent>
     </IonPage>)
 };
