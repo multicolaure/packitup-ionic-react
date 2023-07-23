@@ -36,17 +36,23 @@ export default function FrequencyPicker(props: FrequencyPickerProps) {
     }
 
     return (
-    <IonGrid>
+    <IonGrid className={styles.picker}>
         <IonRow class="ion-align-items-center">
-            <IonCol>
-                <Input name="nbStuffs" type="number" onIonInput={event => handleChange('nbStuffs', event.detail.value)} onIonBlur={props?.onBlur}/>
+            <IonCol className={styles.noStartPadding}>
+                <Input name="nbStuffs" type="number" 
+                    value={usageFrequency.current.nbStuffs}
+                    onIonInput={event => handleChange('nbStuffs', event.detail.value)} onIonBlur={props?.onBlur}/>
             </IonCol>
             <IonCol size="auto" className={styles.label}>every</IonCol>
             <IonCol>
-                <Input name="frequency" type="number" onIonInput={event => handleChange('frequency', event.detail.value)} onIonBlur={props?.onBlur}/>
+                <Input name="frequency" type="number" 
+                    value={usageFrequency.current.frequency}
+                    onIonInput={event => handleChange('frequency', event.detail.value)} onIonBlur={props?.onBlur}/>
             </IonCol>
-            <IonCol size="6">
-                <Select name="unit" aria-label="Frequency unit" onIonChange={event => handleChange('unit', event.detail.value)} onIonBlur={props?.onBlur}>
+            <IonCol size="6" className={styles.noEndPadding}>
+                <Select name="unit" aria-label="Frequency unit"
+                    value={usageFrequency.current.unit}
+                    onIonChange={event => handleChange('unit', event.detail.value)} onIonBlur={props?.onBlur}>
                     {Object.keys(FrequencyUnit).map(unit =>
                         <IonSelectOption value={unit} key={unit} aria-label={unit}>{unit}</IonSelectOption>
                     )}
