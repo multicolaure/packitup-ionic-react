@@ -46,7 +46,7 @@ export function upsertCategories(categories: Array<Category>, user?: User) {
 
         const batch = writeBatch(db);
 
-        const categoriesWithIds = categories.map(category => {
+        const categoriesWithIds = chunk.map(category => {
             return {
                 ...category,
                 id: category.id ?? generateId(ID_PREFIX),

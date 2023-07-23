@@ -3,6 +3,7 @@ import { IonReactRouter } from "@ionic/react-router";
 import { Redirect } from "react-router";
 import CategoryNavigation from "../category/CategoryNavigation";
 import HomeNavigation from "../home/HomeNavigation";
+import StuffNavigation from "../stuff/StuffNavigation";
 import AppMenu from "./AppMenu";
 
 
@@ -15,6 +16,7 @@ const AppNavigation = () => {
           <IonRouterOutlet id="main">
             {HomeNavigation()}
             {CategoryNavigation()}
+            {StuffNavigation()}
             <Redirect exact from="/" to="/home" />
           </IonRouterOutlet>
         </IonSplitPane>
