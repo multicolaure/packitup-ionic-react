@@ -15,13 +15,18 @@ function BaseSelect(props: BaseSelectProps) {
     </IonSelect>);
 }
 
-type SelectProps<TFieldValues, TName extends Path<TFieldValues> = Path<TFieldValues>> = {
+export type SelectProps<TFieldValues, TName extends Path<TFieldValues> = Path<TFieldValues>> = {
     name: UseControllerProps<TFieldValues, TName>['name'],
     control?: UseControllerProps<TFieldValues, TName>['control'],
+    loading?: boolean,
 } & BaseSelectProps;
 
 export default function Select<TFieldValues extends FieldValues = FieldValues, TName extends Path<TFieldValues> = Path<TFieldValues>>(
     props: SelectProps<TFieldValues, TName>) {
+
+    if(props.loading) {
+        return <BaseSelect {...props} disabled={true} label="Loading..."/>
+    }
 
     return props.name && props.control ? (<Controller
         name={props.name}
